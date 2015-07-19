@@ -1,9 +1,9 @@
-var rrafshi = document.createElement("canvas");
-rrafshi.width = 1280;
-rrafshi.height = 720;
-document.body.appendChild(rrafshi);
+var plane = document.createElement("canvas");
+plane.width = 1280;
+plane.height = 720;
+document.body.appendChild(plane);
 
-var ctx = rrafshi.getContext("2d");
+var ctx = plane.getContext("2d");
 
 var bgReady = false;
 var bgImage = new Image();
@@ -13,28 +13,28 @@ bgImage.onload = function(){
 bgImage.src = "images/background.png";
 
 
-var macaReady = false
-var maca = {};
+var catReady = false
+var cat = {};
 
 var macaSpeed = 2;
 
-var macaImage = new Image();
-macaImage.onload = function(){
-    macaReady = true;
+var catImage = new Image();
+catImage.onload = function(){
+    catReady = true;
 }
 
-macaImage.src = "images/cat.png";
+catImage.src = "images/cat.png";
 
 
-var miuReady = false;
-var miu = {};
-var miuCaught = 0;
+var mouseReady = false;
+var mouse = {};
+var mouseCaught = 0;
 
-var miuImage = new Image();
-miuImage.onload = function(){
-    miuReady = true;
+var mouseImage = new Image();
+mouseImage.onload = function(){
+    mouseReady = true;
 }
-miuImage.src = "images/mouse.png";
+mouseImage.src = "images/mouse.png";
 
 var keysDown = {};
 
@@ -48,54 +48,54 @@ addEventListener("keyup", function (e){
 
 var update = function(){
     if(38 in keysDown){
-        maca.y -=macaSpeed;
+        cat.y -=macaSpeed;
     }
     if(40 in keysDown){
-        maca.y +=macaSpeed;
+        cat.y +=macaSpeed;
     }
     if(37 in keysDown){
-        maca.x -=macaSpeed;
+        cat.x -=macaSpeed;
     }
     if(39 in keysDown){
-        maca.x +=macaSpeed;
+        cat.x +=macaSpeed;
     }
     
     if(
-            maca.x <= (miu.x + 32)
-            && miu.x <= (maca.x + 32)
-            && maca.y <= (miu.y + 32)
-            && miu.y <= (maca.y + 32)
+            cat.x <= (mouse.x + 32)
+            && mouse.x <= (cat.x + 32)
+            && cat.y <= (mouse.y + 32)
+            && mouse.y <= (cat.y + 32)
 
         ){
 
-        miuCaught = miuCaught + 1 // miuCaught++
+        mouseCaught = mouseCaught + 1 // mouseCaught++
         reset();
     }
 
 }
 
 var reset = function(){
-   maca.x = rrafshi.width/2;
-   maca.y = rrafshi.height/2; 
+   cat.x = plane.width/2;
+   cat.y = plane.height/2; 
 
                    //maximum 412 + 32
                    //minimumi 0 + 32
-   miu.x = 32 + (Math.random()*(rrafshi.width - 100));
-   miu.y = 32 + (Math.random()*(rrafshi.height - 100));
+   mouse.x = 32 + (Math.random()*(plane.width - 100));
+   mouse.y = 32 + (Math.random()*(plane.height - 100));
 }
 
 
 var render = function(){
     if (bgReady) { ctx.drawImage(bgImage, 0, 0); }
-    if (macaReady) { ctx.drawImage(macaImage, maca.x, maca.y); }
-    if (miuReady) { ctx.drawImage(miuImage, miu.x, miu.y); }
+    if (catReady) { ctx.drawImage(catImage, cat.x, cat.y); }
+    if (mouseReady) { ctx.drawImage(mouseImage, mouse.x, mouse.y); }
     update();
                     // color white
     ctx.fillstyle = "rbg(250, 250, 250)";
     ctx.font = "24px Helvatica";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
-    ctx.fillText("Maca zuri miun: " + miuCaught + "herë", 32, 32);
+    ctx.fillText("cat zuri miun: " + mouseCaught + "herë", 32, 32);
 }
 
 
