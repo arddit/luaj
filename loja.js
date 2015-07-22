@@ -1,6 +1,6 @@
 var plane = document.createElement("canvas");
-plane.width = 1280;
-plane.height = 720;
+plane.width = 1024;
+plane.height = 640;
 document.body.appendChild(plane);
 
 var ctx = plane.getContext("2d");
@@ -16,7 +16,7 @@ bgImage.src = "images/background.png";
 var catReady = false
 var cat = {};
 
-var macaSpeed = 2;
+var catSpeed = 2;
 
 var catImage = new Image();
 catImage.onload = function(){
@@ -48,19 +48,19 @@ addEventListener("keyup", function (e){
 
 var update = function(){
     if(38 in keysDown){
-        cat.y -=macaSpeed;
+        cat.y -=catSpeed;
     }
     if(40 in keysDown){
-        cat.y +=macaSpeed;
+        cat.y +=catSpeed;
     }
     if(37 in keysDown){
-        cat.x -=macaSpeed;
+        cat.x -=catSpeed;
     }
     if(39 in keysDown){
-        cat.x +=macaSpeed;
+        cat.x +=catSpeed;
     }
     
-    if(
+    if( // checks if cat is over mouse. 32 is for size of the cat logo
             cat.x <= (mouse.x + 32)
             && mouse.x <= (cat.x + 32)
             && cat.y <= (mouse.y + 32)
@@ -74,9 +74,9 @@ var update = function(){
 
 }
 
-var reset = function(){
-   cat.x = plane.width/2;
-   cat.y = plane.height/2; 
+var reset = function(){ // called when cat over mouse, will put cat in the middle and mouse on random
+   //cat.x = plane.width/2; // will not reset cat position
+   //cat.y = plane.height/2; 
 
                    //maximum 412 + 32
                    //minimumi 0 + 32
@@ -95,9 +95,12 @@ var render = function(){
     ctx.font = "24px Helvatica";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
-    ctx.fillText("cat zuri miun: " + mouseCaught + "herë", 32, 32);
+    ctx.fillText("The cat has caught the mouse " + mouseCaught + " times.", 32, 32);
 }
 
 
 reset();
 setInterval(render, 1);
+cat.x = plane.width/2; // places cat at start
+cat.y = plane.height/2; 
+
