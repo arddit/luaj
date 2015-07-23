@@ -48,16 +48,36 @@ addEventListener("keyup", function (e){
 
 var update = function(){
     if(38 in keysDown){
-        cat.y -=catSpeed;
+        if(cat.y < 0){
+            cat.y +=catSpeed;
+        }
+        else{
+            cat.y -=catSpeed;
+        }
     }
     if(40 in keysDown){
-        cat.y +=catSpeed;
+        if(cat.y < plane.height-120){
+            cat.y +=catSpeed;
+        }
+        else{
+            cat.y -=catSpeed;
+        }
     }
     if(37 in keysDown){
-        cat.x -=catSpeed;
+        if(cat.x < 0){
+            cat.x += catSpeed;
+        }
+        else{
+            cat.x -=catSpeed;
+        }
     }
     if(39 in keysDown){
-        cat.x +=catSpeed;
+        if(cat.x < plane.width-120){
+            cat.x += catSpeed;
+        }
+        else{
+            cat.x -=catSpeed;
+        }
     }
     
     if( // checks if cat is over mouse. 32 is for size of the cat logo
