@@ -81,10 +81,10 @@ var update = function(){
     }
     
     if( // checks if cat is over mouse. 32 is for size of the cat logo
-            cat.x <= (mouse.x + 32)
-            && mouse.x <= (cat.x + 32)
-            && cat.y <= (mouse.y + 32)
-            && mouse.y <= (cat.y + 32)
+            cat.x <= (mouse.x + 64)
+            && mouse.x <= (cat.x + 64)
+            && cat.y <= (mouse.y + 64)
+            && mouse.y <= (cat.y + 64)
 
         ){
 
@@ -118,9 +118,12 @@ var render = function(){
     ctx.fillText("The cat has caught the mouse " + mouseCaught + " times.", 32, 32);
 }
 
-
 reset();
 setInterval(render, 1);
 cat.x = plane.width/2; // places cat at start
 cat.y = plane.height/2; 
+
+window.onload = function(){
+    document.getElementsById("score").InnerHTML = mouseCaught;
+}
 
